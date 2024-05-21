@@ -18,7 +18,15 @@ public class AttendanceRecord {
     } else {
       throw new IllegalArgumentException("出席的日期不可大於現在的日期。");
     }
-    
+  }
+  public int getYear () {
+    return attendanceDate.getYear();
+  }
+  public int getMonth() {
+    return attendanceDate.getMonth();
+  }
+  public int getDate() {
+    return attendanceDate.getDate();
   }
   public void setTime(Time start, Time end) throws IllegalArgumentException {
     if (start.getHour() >= end.getHour() && start.getMinute() > end.getMinute()) {
@@ -28,7 +36,9 @@ public class AttendanceRecord {
       throw new IllegalArgumentException("下班時間不可大於上班時間。");
     }
   }
-  
+  public boolean getIsLate() {
+    return isLate;
+  }
   public static double minuteToHour(int m) {
     double hours = (double) m / 60;
     return Math.ceil(hours * 10) / 10;

@@ -1,12 +1,15 @@
 package ems;
 import java.util.*; 
-public class Worker {
-   private String name;
+public abstract class Worker {
+    private String name;
     private int id;
     private String position;
     private EDate hiredDate;
     private int salary;
     private int paidLeaveDays = 0;
+    protected abstract int calculateSalary();
+    protected abstract int calculateOvertimePay();
+    protected abstract int calculateBonus();
     private ArrayList<AttendanceRecord> attendanceRecords;
     private ArrayList<AbsentRecord> absentRecords;
     private ArrayList<LeaveRecord> leaveRecords;
@@ -76,7 +79,7 @@ public class Worker {
       }
     }
     
-    int getLeaveDaysThisMonth(int year, int month) {
+    public int getLeaveDaysThisMonth(int year, int month) {
       int leaveDays = 0;
       if (isValidYear(year) && isValidMonth(month)) {
         for (int i = 0; i < leaveRecords.size(); i++) {
@@ -88,7 +91,7 @@ public class Worker {
       return leaveDays;
     }
     
-    int getLeaveDaysThisYear(int year) {
+    public int getLeaveDaysThisYear(int year) {
       int leaveDays = 0;
       if (isValidYear(year)) {
         for (int i = 0; i < leaveRecords.size(); i++) {
@@ -100,4 +103,15 @@ public class Worker {
       return leaveDays;
     }
     
+    public int getAttendanceDaysThisMonth(int year, int month) {
+      int attendanceDays = 0;
+      if (isValidYear(year) && isValidMonth(month)) {
+        for (int i = 0; i < attendanceRecords.size(); i++) {
+          if (attendanceRecords.get(i).getYear() == year && attendanceRecords.get(i).getMonth() == month) {
+            attendanceDays++;
+          }
+        }
+      }
+      return attendanceDays;
+    }
 }
