@@ -33,14 +33,10 @@ public class AbsentRecord {
   public int getMonth() {
     return startDate.getMonth();
   }
-  public Calendar createDate(EDate d) {
-    Calendar cal = Calendar.getInstance();
-    cal.set(d.getYear(), d.getMonth() - 1, d.getDate());
-    return cal;
-  }
+  
   public int getDurationWorkdays() {
-    Calendar start = createDate(startDate);
-    Calendar end = createDate(endDate); 
+    Calendar start = startDate.createDate();
+    Calendar end = endDate.createDate(); 
     int workdays = 0;
     if (start.getTimeInMillis() == end.getTimeInMillis()) {
         return 0;

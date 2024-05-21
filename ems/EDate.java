@@ -71,5 +71,11 @@ public class EDate {
       s = s + m + d;
       return s;
     }
+    
+    public Calendar createDate() {
+      Calendar cal = Calendar.getInstance();
+      cal.set(year, month - 1, date);
+      return cal;
+    }
 }
 
