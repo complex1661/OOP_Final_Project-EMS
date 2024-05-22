@@ -33,6 +33,9 @@ public class AbsentRecord {
   public int getMonth() {
     return startDate.getMonth();
   }
+  public int getDate() {
+    return startDate.getDate();
+  }
   
   public int getDurationWorkdays() {
     Calendar start = startDate.createDate();

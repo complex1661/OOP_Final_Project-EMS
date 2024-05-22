@@ -6,24 +6,19 @@ public abstract class Worker {
     private String position;
     private EDate hiredDate;
     private int salary;
-    private int paidLeaveDays = 0;
+    private int usedPaidLeaveDays;
     protected abstract int calculateSalary();
     protected abstract int calculateOvertimePay();
     protected abstract int calculateBonus();
-    private ArrayList<AttendanceRecord> attendanceRecords;
-    private ArrayList<AbsentRecord> absentRecords;
-    private ArrayList<LeaveRecord> leaveRecords;
-    private TreeMap<Date, TreeMap<Date, Double>> overTimeHours;
+    protected abstract int getRemaingingPaidLeaveDays();
+    private Record records;
 
     public Worker(String name, int id, String position, EDate hiredDate) {
         setName(name);
         setId(id);
         setPosition(position);
-        setHiredDate(hiredDate);
-        this.attendanceRecords = new ArrayList<>();
-        this.absentRecords = new ArrayList<>();
-        this.leaveRecords = new ArrayList<>();
-        this.overTimeHours = new TreeMap<>();
+        this.hiredDate = hiredDate;
+        records = new Record(hiredDate);
     }
     
     public String getName() {
@@ -57,61 +52,40 @@ public abstract class Worker {
     public String getHiredDate() {
         return hiredDate.toString();
     }
-
-    public void setHiredDate(EDate hiredDate) {
-        this.hiredDate = hiredDate;
-    }
-    
-    private boolean isValidMonth(int month) {
-      if (month > 1 && month < 12) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    
-    private boolean isValidYear(int year) {
-      Calendar cd = Calendar.getInstance();
-      if (year > hiredDate.getYear() && year < cd.get(Calendar.YEAR)) {
-        return true;
-      } else {
-        return false;
-      }
-    }
     
     public int getLeaveDaysThisMonth(int year, int month) {
-      int leaveDays = 0;
-      if (isValidYear(year) && isValidMonth(month)) {
-        for (int i = 0; i < leaveRecords.size(); i++) {
-          if (leaveRecords.get(i).getYear() == year && leaveRecords.get(i).getMonth() == month) {
-            leaveDays += leaveRecords.get(i).getDurationWorkdays();
-          }
-        }
-      }
-      return leaveDays;
+      return records.getLeaveDaysThisMonth(year, month);
     }
     
     public int getLeaveDaysThisYear(int year) {
-      int leaveDays = 0;
-      if (isValidYear(year)) {
-        for (int i = 0; i < leaveRecords.size(); i++) {
-          if (leaveRecords.get(i).getYear() == year) {
-            leaveDays += leaveRecords.get(i).getDurationWorkdays();
-          }
-        }
-      }
-      return leaveDays;
+      return records.getLeaveDaysThisYear(year);
     }
     
     public int getAttendanceDaysThisMonth(int year, int month) {
-      int attendanceDays = 0;
-      if (isValidYear(year) && isValidMonth(month)) {
-        for (int i = 0; i < attendanceRecords.size(); i++) {
-          if (attendanceRecords.get(i).getYear() == year && attendanceRecords.get(i).getMonth() == month) {
-            attendanceDays++;
-          }
-        }
-      }
-      return attendanceDays;
+      return records.getAttendanceDaysThisMonth(year, month);
+    }
+    
+    public void addAttendanceRecord(AttendanceRecord r) {
+      records.addAttendanceRecord(r);
+    }
+    
+    public void addLeaveRecord(LeaveRecord r) {
+      records.addLeaveRecord(r);
+    }
+    
+    public void addAbsentRecord(LeaveRecord r) {
+      records.addAbsentRecord(r);
+    }
+    
+    public void removeAttendanceRecord(AttendanceRecord r) {
+      records.removeAttendanceRecord(r);
+    }
+    
+    public void removeLeaveRecord(LeaveRecord r) {
+      records.removeLeaveRecord(r);
+    } 
+    
+    public void removeAbsentRecord(AbsentRecord r) {
+      records.removeAbsentRecord(r);
     }
 }

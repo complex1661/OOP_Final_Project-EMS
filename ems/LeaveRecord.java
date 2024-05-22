@@ -5,6 +5,7 @@ public class LeaveRecord extends AbsentRecord {
     super(txt, sd, ed);
     setLeaveType(leaveType); 
   }
+  
   public void setLeaveType(String s) throws IllegalArgumentException {
     if (s != null) {
       leaveType = s;
