@@ -1,11 +1,8 @@
 package ems;
 import java.util.*; 
 public abstract class Worker {
-    private String name;
-    private int id;
-    private String position;
+    private WorkerInfo workerInfo;
     private EDate hiredDate;
-    private int salary;
     private int usedPaidLeaveDays;
     protected abstract int calculateSalary();
     protected abstract int calculateOvertimePay();
@@ -13,42 +10,24 @@ public abstract class Worker {
     protected abstract int getRemaingingPaidLeaveDays();
     private Record records;
 
-    public Worker(String name, int id, String position, EDate hiredDate) {
-        setName(name);
-        setId(id);
-        setPosition(position);
+    public Worker(WorkerInfo wi, EDate hiredDate) {
+        workerInfo = wi;
         this.hiredDate = hiredDate;
         records = new Record(hiredDate);
     }
     
     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) throws IllegalArgumentException {
-      if (name == null || name.length() > 10) {
-        throw new IllegalArgumentException("無效的名字。");
-      } 
-      else this.name = name;
+        return workerInfo.getName();
     }
 
     public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        if (id == 0) throw new IllegalArgumentException("無效的名字。");
-        else this.id = id;
+        return workerInfo.getId();
     }
 
     public String getPosition() {
-        return position;
+        return workerInfo.getPosition();
     }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
+    
     public String getHiredDate() {
         return hiredDate.toString();
     }

@@ -1,8 +1,8 @@
 package ems;
 public class FullTimeWorker extends Worker{
   private final int paidLeaveDays = 5;
-  public FullTimeWorker(String name, int id, String position, EDate hiredDate) {
-    super(name, id, position, hiredDate);
+  public FullTimeWorker(WorkerInfo wi, EDate hiredDate) {
+    super(wi, hiredDate);
   }
   public int calculateSalary() {
     return 0;
