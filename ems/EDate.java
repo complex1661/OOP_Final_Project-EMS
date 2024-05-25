@@ -1,6 +1,10 @@
 package ems;
 import java.util.Calendar;
-public class EDate {
+import java.io.*;
+
+public class EDate implements Serializable{
+  private static final long serialVersionUID = 1L;
+  
     private int year;
     private int month;
     private int date;

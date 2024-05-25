@@ -1,6 +1,10 @@
 package ems;
 import java.util.*;
-public class Record {
+import java.io.*;
+
+public class Record implements Serializable{
+  private static final long serialVersionUID = 1L;
+  
     private ArrayList<AttendanceRecord> attendanceRecords;
     private ArrayList<AbsentRecord> absentRecords;
     private ArrayList<LeaveRecord> leaveRecords;

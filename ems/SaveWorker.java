@@ -22,11 +22,9 @@ public class SaveWorker extends SaveFile{
     //執行後自動關閉
     try (FileOutputStream fileOut = new FileOutputStream(file);
          ObjectOutputStream output = new ObjectOutputStream(fileOut)) {
-      
            output.writeObject(worker);
-          
     } catch (IOException e) {
-      System.out.printf("檔案\'%s\'儲存發生錯誤：%s\n", fileName, e.getMessage());
+      System.out.printf("檔案\'%s\'儲存發生錯誤：%s\n", fileName, e);
     }
   }
   
