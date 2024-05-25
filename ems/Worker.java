@@ -1,6 +1,8 @@
 package ems;
 import java.util.*; 
 public abstract class Worker {
+    protected static final long serialVersionUID = 1L;
+    
     private String name;
     private int id;
     private String position;
