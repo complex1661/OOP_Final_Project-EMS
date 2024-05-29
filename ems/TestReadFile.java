@@ -10,7 +10,7 @@ public class TestReadFile{
       int i = 0;
       for (Worker worker : workers) {
         i ++;
-        System.out.println("worker" + i + "¡G" +  worker.toString());
+        System.out.println("worker" + i + "¡G" +  worker.toString() + ":" + worker.getId() + ", Salary:" + worker.calculateSalary(2024,5));
       }
     } catch (Exception e){
       System.out.println(e);

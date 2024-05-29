@@ -55,6 +55,18 @@ public class Record implements Serializable{
       return leaveDays;
     }
     
+    public int getAttendanceHoursThisMonth(int year, int month) {
+      int attendanceHours = 0;
+      if (isValidYear(year) && isValidMonth(month)) {
+        for (AttendanceRecord attendanceRecord : attendanceRecords) {
+          if (attendanceRecord.getYear() == year && attendanceRecord.getMonth() == month) {
+            attendanceHours += attendanceRecord.getHoursWorked();
+          }
+        }
+      }
+      return attendanceHours;
+    }
+    
     public int getAttendanceDaysThisMonth(int year, int month) {
       int attendanceDays = 0;
       if (isValidYear(year) && isValidMonth(month)) {

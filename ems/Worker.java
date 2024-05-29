@@ -10,10 +10,11 @@ public abstract class Worker implements Serializable{
     private WorkerInfo workerInfo;
     private EDate hiredDate;
     private int usedPaidLeaveDays;
-    protected abstract int calculateSalary();
-    protected abstract int calculateOvertimePay();
-    protected abstract int calculateBonus();
-    protected abstract int getRemaingingPaidLeaveDays();
+    private int hourlyWage;
+    public abstract int calculateSalary(int year, int month);
+    public abstract int calculateOvertimePay();
+    public abstract int calculateBonus();
+    public abstract int getRemaingingPaidLeaveDays();
     private Record records;
 
     public Worker(WorkerInfo wi, EDate hiredDate) {
@@ -46,6 +47,10 @@ public abstract class Worker implements Serializable{
       return records.getLeaveDaysThisYear(year);
     }
     
+    public int getAttendanceHoursThisMonth(int year, int month) {
+      return records.getAttendanceHoursThisMonth(year, month);
+    }
+    
     public int getAttendanceDaysThisMonth(int year, int month) {
       return records.getAttendanceDaysThisMonth(year, month);
     }
@@ -73,4 +78,5 @@ public abstract class Worker implements Serializable{
     public void removeAbsentRecord(AbsentRecord r) {
       records.removeAbsentRecord(r);
     }
+
 }

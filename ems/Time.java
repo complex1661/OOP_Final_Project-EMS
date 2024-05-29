@@ -1,6 +1,9 @@
 package ems;
 import java.util.Calendar;
-public class Time {
+import java.io.Serializable;
+
+public class Time implements Serializable {
+  private static final long serialVersionUID = 1L;
   private int hour;
   private int minute;
   public Time () {
